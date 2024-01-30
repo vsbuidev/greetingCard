@@ -1,14 +1,25 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useState } from "react";
 import GreetingCard from "./Components/GreetingCard";
+import GreetingForm from "./Components/GreetingForm";
 import "./App.css";
 
 function App() {
+  const [greetingData, setGreetingData] = useState(null);
+
+  const handleFormSubmit = (data) => {
+    setGreetingData(data);
+  };
+
   return (
     <div className="App">
-      <GreetingCard recipient="John" occasion="Birthday" />
-      <GreetingCard recipient="Mark" occasion="Marriage" />
-      <GreetingCard recipient="David" occasion="Party" />
+      <GreetingForm onFormSubmit={handleFormSubmit} />
+      {greetingData && (
+        <GreetingCard
+          recipient={greetingData.recipient}
+          occasion={greetingData.occasion}
+        />
+      )}
     </div>
   );
 }
